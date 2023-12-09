@@ -7,8 +7,9 @@
     "start": "vite",
     "build": "vite build",
     "test": "jest"
-  },  
+  },
   "dependencies": {
+    "@clerk/clerk-react": "^4.28.3",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
     "@types/react-router-dom": "^5.3.3",
