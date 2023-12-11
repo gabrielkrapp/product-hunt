@@ -1,20 +1,15 @@
-import { HASUSERVOTED } from "../database/Querys/RouterQuerys";
-import { pool } from "../database/database";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function hasUserVoted(userId: string, productId: string): Promise<boolean> {
-    const client = await pool.connect();
-
-    try {
-        const result = await client.query(
-            HASUSERVOTED,
-            [userId, productId]
-        );
-
-        return result.rows.length > 0;
-    } catch (error) {
-        console.error('Error checking user vote:', error);
-        throw error;
-    } finally {
-        client.release();
-    }
+    const vote = await prisma.userVote.findUnique({
+        where: {
+            userId_productId: {
+                userId: userId,
+                productId: productId,
+            },
+        },
+    });
+    return !!vote;
 }

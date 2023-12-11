@@ -15,6 +15,13 @@ model Product {
   upvotes     Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  userVotes   UserVote[]
+}
+
+model User {
+  id       String     @id @default(uuid())
+  // Adicione outros campos aqui
+  userVotes UserVote[]
 }
 
 model UserVote {
