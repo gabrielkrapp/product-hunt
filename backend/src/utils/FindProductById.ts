@@ -1,15 +1,15 @@
-import { GETPRODUCTBYID } from "../database/Querys/RouterQuerys";
-import { pool } from "../database/database";
+import { PrismaClient } from "@prisma/client";
 
 export async function findProductById(productId: string) {
-    const client = await pool.connect();
+    const prisma = new PrismaClient();
     try {
-        const result = await client.query(GETPRODUCTBYID, [productId]);
-        if (result.rows.length === 0) {
-            return null;
-        }
-        return result.rows[0];
+        const product = await prisma.product.findUnique({
+            where: {
+                id: productId,
+            },
+        });
+        return product;
     } finally {
-        client.release();
+        await prisma.$disconnect();
     }
 }

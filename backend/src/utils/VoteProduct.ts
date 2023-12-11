@@ -1,13 +1,14 @@
-import { REMOVEVOTEPRODUCT, VOTEPRODUCT } from "../database/Querys/RouterQuerys";
-import { pool } from "../database/database";
+import { PrismaClient } from "@prisma/client";
 
-export async function voteProduct(productId: string, action: 'add' | 'remove'): Promise<Product> {
-    const client = await pool.connect();
-    try {
-        const query = action === 'add' ? VOTEPRODUCT : REMOVEVOTEPRODUCT;
-        const result = await client.query<Product>(query, [productId]);
-        return result.rows[0];
-    } finally {
-        client.release();
-    }
+const prisma = new PrismaClient();
+
+export async function voteProduct(productId: string, action: 'add' | 'remove'): Promise<number> {
+    const updatedProduct = await prisma.product.update({
+        where: { id: productId },
+        data: {
+            upvotes: action === 'add' ? { increment: 1 } : { decrement: 1 },
+        },
+        select: { upvotes: true },
+    });
+    return updatedProduct.upvotes;
 }
