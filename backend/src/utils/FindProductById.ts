@@ -1,10 +1,10 @@
 import { GETPRODUCTBYID } from "../database/Querys/RouterQuerys";
 import { pool } from "../database/database";
 
-export async function findProductById(productId: string): Promise<Product | null> {
+export async function findProductById(productId: string) {
     const client = await pool.connect();
     try {
-        const result = await client.query<Product>(GETPRODUCTBYID, [productId]);
+        const result = await client.query(GETPRODUCTBYID, [productId]);
         if (result.rows.length === 0) {
             return null;
         }
