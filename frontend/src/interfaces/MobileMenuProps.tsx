@@ -1,0 +1,3 @@
+interface MobileMenuProps {
+    isMenuOpen: boolean;
+}

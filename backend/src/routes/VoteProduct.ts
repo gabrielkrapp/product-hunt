@@ -3,7 +3,6 @@ import { findProductById } from "../utils/FindProductById";
 import { notFound, sendData } from "../utils/ResponseHandlers";
 import { voteProduct } from "../utils/VoteProduct";
 import { hasUserVoted } from "../utils/HasUserVoted";
-import { CustomJwtPayload } from "../interfaces/CustomJwtPayload";
 import { verifyToken } from "../utils/AuthenticateToken";
 
 const router = express.Router();

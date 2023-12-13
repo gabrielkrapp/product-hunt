@@ -1,7 +1,7 @@
 import express from "express";
 import { findProductById } from "../utils/FindProductById";
 import { notFound, sendData } from "../utils/ResponseHandlers";
-import { voteProduct } from "../utils/VoteProduct";
+import { totalOfVotes } from "../utils/TotalOfVotes";
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get("/vote/:id", async (req, res, next) => {
     }
 
     try {
-        const numberOfVotes = await voteProduct(id);
+        const numberOfVotes = await totalOfVotes(id);
 
         return sendData(res, numberOfVotes);
     } catch (err) {
