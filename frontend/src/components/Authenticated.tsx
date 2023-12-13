@@ -1,10 +1,10 @@
 import { SignedIn } from "@clerk/clerk-react";
-import { Home } from "../pages/Home";
+import { Dashboard } from "../pages/Dashboard";
 
 export const Authenticated = () => {
     return (
         <SignedIn>
-            <Home />
+            <Dashboard />
         </SignedIn>
     );
 };
