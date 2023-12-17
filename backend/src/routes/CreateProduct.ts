@@ -6,7 +6,7 @@ import { verifyToken } from "../utils/AuthenticateToken";
 const router = express.Router();
 
 router.post("/products/:id", async (req, res, next) => {
-    const { title, description } = req.body;
+    const { title, description, imageUrl } = req.body;
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
@@ -20,7 +20,7 @@ router.post("/products/:id", async (req, res, next) => {
     }
 
     try {
-        const product = await createProduct(title, description);
+        const product = await createProduct(title, description, imageUrl);
         return sendData(res, product);
     } catch (err) {
         next(err)
