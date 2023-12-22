@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Search } from './Search';
-import { Logo } from './Logo';
-import { Menu } from './Menu';
-import { MobileMenuIcon } from './MobileMenuIcon';
-import { MobileMenu } from './MobileMenu';
+import { Search } from '../atoms/Search';
+import { Logo } from '../atoms/Logo';
+import { Menu } from '../molecules/Menu';
+import { MobileMenuIcon } from '../molecules/MobileMenuIcon';
+import { MobileMenu } from '../molecules/MobileMenu';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
